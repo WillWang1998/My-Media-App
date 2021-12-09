@@ -12,8 +12,9 @@
     "https://git.heroku.com/comp531-rw48-mymedia.git"
   ],
   "author": "Ruijin Wang",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "gts": "^3.1.0",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.27.1",
     "cookie-parser": "^1.4.5",
