@@ -5,7 +5,8 @@ const {
     updateUserLoginInfo,
     queryUserLoginInfoAndSaveSid,
     queryGoogleIdUsernameAndSaveSidOrRegister,
-    addGoogleBinding
+    addGoogleLinking,
+    deleteGoogleLinkingFromDB
 } = require("./MongoDBConnector");
 const session = require("express-session");
 const passport = require("passport");
@@ -29,7 +30,7 @@ const isLoggedIn = async (req, res, next) => {
                 res.sendStatus(500);
             } else if (username) {
                 req.username = username;
-                res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000, sameSite: 'none', secure: true, });
+                res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000});
                 next();
             } else {
                 res.clearCookie("sid");
@@ -166,6 +167,11 @@ const googleStrategy = new GoogleStrategy({
     return done(null, user);
 });
 
+const deleteGoogleLinking = async (req, res) => {
+    let username = res.username;
+    await deleteGoogleLinkingFromDB(res, username);
+}
+
 module.exports = (app) => {
     app.post("/api/login", postLogin);
     app.post("/api/register", googleInfoMW, postRegister);
@@ -211,7 +217,7 @@ module.exports = (app) => {
                     } else if (username) {
                         req.username = username;
                         req.user = user;
-                        await addGoogleBinding(res, req);
+                        await addGoogleLinking(res, req);
                     } else {
                         res.cookie("backendMessage", "error#You need to login", {
                             maxAge: 10000,
@@ -228,4 +234,5 @@ module.exports = (app) => {
     app.use(isLoggedIn);
     app.put("/api/logout", putLogout);
     app.put("/api/password", putPassword);
+    app.delete("api/unlink_google_account", deleteGoogleLinking);
 }

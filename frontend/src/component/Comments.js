@@ -24,7 +24,6 @@ const Comments = (props) => {
         }
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/comment", {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },

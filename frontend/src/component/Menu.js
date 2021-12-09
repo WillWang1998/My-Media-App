@@ -24,7 +24,6 @@ const MyMediaMenu = () => {
             if (info.key === "logout") {
                 await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/logout", {
                     method: "PUT",
-                    credentials: "include",
                 });
                 Cookies.remove("isLoggedIn");
                 history.push({

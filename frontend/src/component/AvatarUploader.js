@@ -18,7 +18,6 @@ const AvatarUploader = () => {
     const load = async () => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/avatar", {
             method: "GET",
-            credentials: "include",
         }).then(res => {
             if (res.ok) {
                 showBackendMessage();
@@ -56,7 +55,6 @@ const AvatarUploader = () => {
         if (uploaded) {
             await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/avatar", {
                 method: "PUT",
-                credentials: "include",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
                     avatar: imageUrl,
@@ -84,8 +82,7 @@ const AvatarUploader = () => {
                     listType="picture-card"
                     className="avatar-uploader"
                     showUploadList={false}
-                    action="https://comp531-rw48-mymedia-backend.herokuapp.com/upload/avatar"
-                    withCredentials={true}
+                    action="https://comp531-rw48-mymedia.herokuapp.com/api/upload/avatar"
                     beforeUpload={beforeUpload}
                     onChange={handleChange}
                 >

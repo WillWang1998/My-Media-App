@@ -12,7 +12,6 @@ const PasswordSetup = () => {
     const onFinish = async (values) => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/password", {
             method: "PUT",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },

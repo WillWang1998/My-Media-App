@@ -24,7 +24,6 @@ const SubmitOrEditArticle = (props) => {
         if (props.id) {
             await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/article/" + props.id, {
                 method: "PUT",
-                credentials: "include",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
                     title: values.title,
@@ -51,7 +50,6 @@ const SubmitOrEditArticle = (props) => {
         } else {
             await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/article", {
                 method: "POST",
-                credentials: "include",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
                     title: values.title,

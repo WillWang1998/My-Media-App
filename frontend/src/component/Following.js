@@ -18,7 +18,6 @@ const Following = (props) => {
         if (!username) return;
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/profile/" + username, {
             method: "GET",
-            credentials: "include",
         }).then(res => {
             if (res.ok) {
                 showBackendMessage();

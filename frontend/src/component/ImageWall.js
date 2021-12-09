@@ -81,8 +81,7 @@ const ImagesWall = (props) => {
         <>
             <Upload
                 name="image"
-                action="https://comp531-rw48-mymedia-backend.herokuapp.com/upload/image"
-                withCredentials={true}
+                action="https://comp531-rw48-mymedia.herokuapp.com/api/upload/image"
                 listType="picture-card"
                 fileList={fileList}
                 onPreview={handlePreview}

@@ -16,7 +16,6 @@ const Articles = () => {
     const load = async () => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/search/article", {
             method: "POST",
-            credentials: "include",
         }).then(res => {
             if (res.ok) {
                 showBackendMessage();
@@ -35,7 +34,6 @@ const Articles = () => {
     const onSearch = async (value) => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/search/article", {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json"
             },

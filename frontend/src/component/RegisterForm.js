@@ -44,7 +44,6 @@ const RegisterForm = () => {
     const onFinish = async (values) => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/register",{
             method: "POST",
-            credentials: "include",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 username: values.username,

@@ -301,8 +301,8 @@ const addUser = async (res, userProfile, userLoginInfo, redisClient, googleId) =
                 });
                 let sid = md5(new Date().getTime() + Math.random() * 1000000000000);
                 await redisClient.hset("sessions", sid, userLoginInfo.username);
-                res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000, sameSite: 'none', secure: true, });
-                res.cookie("sid", sid, {maxAge: 3600 * 1000, httpOnly: true, sameSite: 'none', secure: true, });
+                res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000});
+                res.cookie("sid", sid, {maxAge: 3600 * 1000, httpOnly: true});
                 let msg = {username: userLoginInfo.username, result: "success"};
                 res.send(msg);
             }
@@ -332,8 +332,8 @@ const queryUserLoginInfoAndSaveSid = async (res, redisClient, userLoginInfo) => 
                     if (err) {
                         res.sendStatus(500);
                     } else {
-                        res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000, sameSite: 'none', secure: true, });
-                        res.cookie("sid", sid, { maxAge: 3600 * 1000, httpOnly: true, sameSite: 'none', secure: true, });
+                        res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000});
+                        res.cookie("sid", sid, { maxAge: 3600 * 1000, httpOnly: true});
                         let msg = {username: userLoginInfo.username, result: "success"};
                         res.send(msg);
                     }
@@ -357,8 +357,6 @@ const queryGoogleIdUsernameAndSaveSidOrRegister = async (res, redisClient, req) 
         } else if (!doc) {
             const cookieSettings = {
                 maxAge: 600 * 1000,
-                sameSite: 'none',
-                secure: true,
             }
             res.cookie("usernameForGoogle", googleUserLoginInfo.profile.username, cookieSettings);
             res.cookie("displayedNameForGoogle", googleUserLoginInfo.profile.displayedName, cookieSettings);
@@ -366,9 +364,6 @@ const queryGoogleIdUsernameAndSaveSidOrRegister = async (res, redisClient, req) 
             res.cookie("googleToken", googleUserLoginInfo.accessToken, {
                 maxAge: 600 * 1000,
                 httpOnly: true,
-                sameSite: 'none',
-                secure: true,
-                
             });
             let googleTokenForRedis = "google_token#" + googleUserLoginInfo.accessToken;
             redisClient.SET(googleTokenForRedis,
@@ -384,9 +379,6 @@ const queryGoogleIdUsernameAndSaveSidOrRegister = async (res, redisClient, req) 
                         } else {
                             res.cookie("backendMessage", "warning#You need to link an account for the first time.", {
                                 maxAge: 10000,
-                                sameSite: 'none',
-                                secure: true,
-                                
                             });
                             res.redirect("https://comp531-rw48-mymedia.herokuapp.com/register_with_google");
                         }
@@ -400,14 +392,11 @@ const queryGoogleIdUsernameAndSaveSidOrRegister = async (res, redisClient, req) 
                     console.error("["+new Date().toLocaleString()+"]: ", err);
                     res.cookie("backendMessage", "error#Internal Server Error.", {
                         maxAge: 10000,
-                        sameSite: 'none',
-                        secure: true,
-                        
                     });
                     res.redirect("https://comp531-rw48-mymedia.herokuapp.com/landing");
                 } else {
-                    res.cookie("sid", sid, { maxAge: 3600 * 1000, httpOnly: true, sameSite: 'none', secure: true, });
-                    res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000, sameSite: 'none', secure: true, });
+                    res.cookie("sid", sid, { maxAge: 3600 * 1000, httpOnly: true});
+                    res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000});
                     res.redirect("https://comp531-rw48-mymedia.herokuapp.com/home");
                 }
             });
@@ -451,8 +440,8 @@ const updateUserLoginInfo = async (res, oldPassWord, userLoginInfo) => {
     }
 }
 
-const addGoogleBinding = async (res, req) => {
-    const googleBindingInfo = req.user;
+const addGoogleLinking = async (res, req) => {
+    const googleLinkingInfo = req.user;
     const username = req.username;
     const session = await mongoose.startSession();
     try {
@@ -461,14 +450,14 @@ const addGoogleBinding = async (res, req) => {
                 username: username,
             }, {session: session}).catch(err => {throw err;});
             await new GoogleIdUsername({
-                google_id: googleBindingInfo.googleId,
+                google_id: googleLinkingInfo.googleId,
                 username: username,
             }).save({session: session,}).catch(err => {throw err;});
             await UserProfile.findOneAndUpdate({
                 username: username,
             }, {
-                google_id: googleBindingInfo.googleId,
-                google_email: googleBindingInfo.profile.email,
+                google_id: googleLinkingInfo.googleId,
+                google_email: googleLinkingInfo.profile.email,
             }, {session: session}).catch(err => {throw err;});
             res.redirect("https://comp531-rw48-mymedia.herokuapp.com/profile");
         });
@@ -476,11 +465,38 @@ const addGoogleBinding = async (res, req) => {
         console.error("[" + new Date().toLocaleString() + "]: ", err);
         res.cookie("backendMessage", "error#Internal Server Error", {
             maxAge: 10000,
-            sameSite: 'none',
-            secure: true,
-            
         });
         res.sendStatus(500);
+    }
+}
+
+const deleteGoogleLinkingFromDB = async (res, username) => {
+    const session = await mongoose.startSession();
+    try {
+        await session.withTransaction(async () => {
+            let googleIdUsername = await GoogleIdUsername.findOneAndDelete({
+                username: username
+            }, {session: session}).catch(err => {throw err;});
+            if (!googleIdUsername) {
+                res.sendStatus(404);
+            } else {
+                let doc = await UserProfile.findOneAndUpdate({
+                    username: username
+                }, {
+                    google_id: null,
+                    google_username: null,
+                },{
+                    session: session
+                }).catch(err => {throw err;});
+                if (!doc || !doc.google_id) {
+                    res.sendStatus(404);
+                } else {
+                    res.sendStatus(200);
+                }
+            }
+        })
+    } catch {
+
     }
 }
 
@@ -1005,7 +1021,8 @@ module.exports = {
     queryUserLoginInfoAndSaveSid,
     addUser,
     queryGoogleIdUsernameAndSaveSidOrRegister,
-    addGoogleBinding,
+    addGoogleLinking,
+    deleteGoogleLinkingFromDB,
 
     // Article.js
     queryArticleByIDFromDB,

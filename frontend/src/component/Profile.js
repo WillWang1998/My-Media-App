@@ -19,7 +19,6 @@ const Profile = () => {
     const load = async () => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/profile", {
             method: "GET",
-            credentials: "include",
         }).then(res => {
             if (res.ok) {
                 showBackendMessage();
@@ -47,7 +46,6 @@ const Profile = () => {
     const onFinish = async (values) => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/profile", {
             method: "PUT",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },

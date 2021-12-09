@@ -7,19 +7,11 @@ const Comment = require("./src/Comment");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const upCloud = require("./src/UploadCloudinary");
-const cors = require("cors");
 const path = require("path");
-
-const corsOption = {
-    origin: ["https://comp531-rw48-mymedia-frontend.herokuapp.com"],
-    credentials: true,
-}
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors(corsOption));
-app.set("trust proxy", 1);
 
 app.get("/api/hello", (req, res) => {
     res.send("hello!");

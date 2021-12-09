@@ -16,7 +16,6 @@ const LogInForm = () => {
     const onFinish = async (values) => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/login", {
             method: "POST",
-            credentials: "include",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 username: values.username,
@@ -41,7 +40,7 @@ const LogInForm = () => {
     };
 
     const googleLogin =  () => {
-        window.location.href = "https://comp531-rw48-mymedia-backend.herokuapp.com/auth/google";
+        window.location.href = "https://comp531-rw48-mymedia.herokuapp.com/api/auth/google";
     }
 
     return (

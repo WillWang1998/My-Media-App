@@ -16,7 +16,6 @@ const MinProfile = () => {
     const load = async () => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/profile", {
             method: "GET",
-            credentials: "include",
         }).then(res => {
             if (res.ok) {
                 showBackendMessage();
@@ -38,7 +37,7 @@ const MinProfile = () => {
             setEditing(false);
             await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/headline", {
                 method: "PUT",
-                credentials: "include",
+                
                 headers: {
                     "Content-Type": "application/json",
                 },

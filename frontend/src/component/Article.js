@@ -28,7 +28,6 @@ const Article = (props) => {
         const load = async () => {
             await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/article/" + id, {
                 method: "GET",
-                credentials: "include",
             }).then(res => {
                 if (res.ok) {
                     showBackendMessage();
@@ -45,7 +44,7 @@ const Article = (props) => {
                 setCommentIdList(commentIdList => res.commentIdList);
                 await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/profile/" + res.author, {
                     method: "GET",
-                    credentials: "include",
+                    
                 }).then(res => {
                     if (res.ok) {
                         showBackendMessage();
@@ -65,7 +64,7 @@ const Article = (props) => {
     const onDelete = async () => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/article/" + id, {
             method: "DELETE",
-            credentials: "include",
+            
         }).then(res => {
             if (res.ok) {
                 showBackendMessage();

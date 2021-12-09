@@ -17,7 +17,6 @@ const Followings = () => {
     const load = async () => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/following", {
             method: "GET",
-            credentials: "include",
         }).then(res => {
             if (res.ok) {
                 showBackendMessage();
@@ -40,7 +39,7 @@ const Followings = () => {
             setShowSearchUserList(true);
             await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/following/search", {
                 method: "POST",
-                credentials: "include",
+                
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -63,7 +62,7 @@ const Followings = () => {
     const addNewFollowing = (value) => async () => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/following/" + value, {
             method: "PUT",
-            credentials: "include",
+            
         }).then(res => {
             if (res.ok) {
                 showBackendMessage();
@@ -82,7 +81,7 @@ const Followings = () => {
     const deleteFollowing = (value) => async () => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/following/" + value, {
             method: "DELETE",
-            credentials: "include",
+            
         }).then(res => {
             if (res.ok) {
                 showBackendMessage();

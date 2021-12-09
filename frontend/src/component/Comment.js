@@ -35,7 +35,7 @@ const Comment = (props) => {
             setTimeStamp(res.timestamp);
             await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/profile/" + res.author, {
                 method: "GET",
-                credentials: "include",
+                
             }).then(res => {
                 if (res.ok) {
                     showBackendMessage();
@@ -53,7 +53,6 @@ const Comment = (props) => {
     const onDelete = async () => {
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/comment/" + id, {
             method: "DELETE",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -80,7 +79,7 @@ const Comment = (props) => {
         }
         await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/comment/" + id, {
             method: "PUT",
-            credentials: "include",
+            
             headers: {
                 "Content-Type": "application/json",
             },
