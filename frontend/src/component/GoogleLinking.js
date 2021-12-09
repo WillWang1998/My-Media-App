@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {showBackendMessage} from "../util/Functions";
-import EventBus from "../util/EventBus";
-import {Button, Form, message} from "antd";
+import {Button, Form, message, Space} from "antd";
 import {formItemLayout, tailFormItemLayout} from "../util/Layout";
 import {GoogleOutlined} from "@ant-design/icons";
-import {getAllMethods} from "googleapis/build/src/generator/samplegen";
 
 const GoogleLinking = () => {
 
