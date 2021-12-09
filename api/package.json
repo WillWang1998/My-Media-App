@@ -1,7 +1,7 @@
 {
   "name": "comp531-rw48-mymedia-backend",
   "version": "1.0.0",
-  "description": "Backend for MyMedia",
+  "description": "The backend fof MyMedia",
   "main": "Index.js",
   "scripts": {
     "test": "jasmine-node ./spec --junitreport",
