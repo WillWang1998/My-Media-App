@@ -1,0 +1,40 @@
+{
+  "name": "comp531-rw48-mymedia-backend",
+  "version": "1.0.0",
+  "description": "Backend for MyMedia",
+  "main": "Index.js",
+  "scripts": {
+    "test": "jasmine-node ./spec --junitreport",
+    "run": "node Index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RiceWebDevCourse/final-backend-WillWang1998.git"
+  },
+  "author": "rw48",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RiceWebDevCourse/final-backend-WillWang1998/issues"
+  },
+  "homepage": "https://github.com/RiceWebDevCourse/final-backend-WillWang1998#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.27.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "es6-promise": "^4.2.8",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "googleapis": "^92.0.0",
+    "is_email": "^0.0.2",
+    "isomorphic-fetch": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.3.0",
+    "mongoose": "^6.0.13",
+    "multer": "^1.4.3",
+    "passport": "^0.5.0",
+    "passport-google-oauth": "^2.0.0",
+    "path": "^0.12.7",
+    "redis": "^3.1.2"
+  }
+}

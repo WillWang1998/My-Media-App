@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+<testsuite name="Validate Article Functionality" errors="0" tests="13" failures="0" time="1.42" timestamp="2021-11-20T00:26:25">
+  <testcase classname="Validate Article Functionality" name="login user" time="0.126"></testcase>
+  <testcase classname="Validate Article Functionality" name="get the specific article" time="0.078"></testcase>
+  <testcase classname="Validate Article Functionality" name="get the articles of a specific user" time="0.103"></testcase>
+  <testcase classname="Validate Article Functionality" name="get the articles related to the user" time="0.109"></testcase>
+  <testcase classname="Validate Article Functionality" name="logout user" time="0.011"></testcase>
+  <testcase classname="Validate Article Functionality" name="login user" time="0.077"></testcase>
+  <testcase classname="Validate Article Functionality" name="post a new article" time="0.279"></testcase>
+  <testcase classname="Validate Article Functionality" name="can comment under an article" time="0.132"></testcase>
+  <testcase classname="Validate Article Functionality" name="can edit a comment with same username" time="0.237"></testcase>
+  <testcase classname="Validate Article Functionality" name="cannot edit a comment with different username" time="0.073"></testcase>
+  <testcase classname="Validate Article Functionality" name="can edit articles with same username" time="0.1"></testcase>
+  <testcase classname="Validate Article Functionality" name="cannot edit articles with different username" time="0.077"></testcase>
+  <testcase classname="Validate Article Functionality" name="logout user" time="0.012"></testcase>
+</testsuite>
+</testsuites>
