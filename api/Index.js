@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const upCloud = require("./src/UploadCloudinary");
 const cors = require("cors");
-const path = require("express");
+const path = require("path");
 
 const corsOption = {
     origin: ["https://comp531-rw48-mymedia-frontend.herokuapp.com"],
