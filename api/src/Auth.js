@@ -169,6 +169,7 @@ const googleStrategy = new GoogleStrategy({
 
 const deleteGoogleLinking = async (req, res) => {
     let username = res.username;
+    console.log("debug username", username);
     await deleteGoogleLinkingFromDB(res, username);
 }
 
