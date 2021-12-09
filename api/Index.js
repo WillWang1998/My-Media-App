@@ -25,17 +25,17 @@ app.get("/api/hello", (req, res) => {
     res.send("hello!");
 });
 
+app.use(express.static(path.join(__dirname, '../frontend/build')))
+app.get(/^\/(?!api).*/, (req, res) => {
+    res.sendFile(path.join(__dirname + '/../frontend/build/index.html'))
+})
+
 Auth(app);
 Article(app);
 Profile(app);
 Following(app);
 Comment(app);
 upCloud.setup(app);
-
-app.use(express.static(path.join(__dirname, '../frontend/build')))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../frontend/build/index.html'))
-})
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
