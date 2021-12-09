@@ -1,0 +1,16 @@
+{
+  "name": "comp531-mymedia-final",
+  "version": "1.0.0",
+  "description": "The final project of COMP531",
+  "scripts": {
+    "frontend": "cd frontend && npm start",
+    "api": "cd api && node index.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run api\" \"npm run frontend\"",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
+  },
+  "keywords": [
+    "https://git.heroku.com/comp531-rw48-mymedia.git"
+  ],
+  "author": "Ruijin Wang",
+  "license": "ISC"
+}
