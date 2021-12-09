@@ -477,6 +477,7 @@ const deleteGoogleLinkingFromDB = async (res, username) => {
             let googleIdUsername = await GoogleIdUsername.findOneAndDelete({
                 username: username
             }, {session: session}).catch(err => {throw err;});
+            console.log("debug googleIdUsername", googleIdUsername);
             if (!googleIdUsername) {
                 res.sendStatus(404);
             } else {
@@ -488,6 +489,7 @@ const deleteGoogleLinkingFromDB = async (res, username) => {
                 },{
                     session: session
                 }).catch(err => {throw err;});
+                console.log("debug doc", doc);
                 if (!doc || !doc.google_id) {
                     res.sendStatus(404);
                 } else {
@@ -495,8 +497,11 @@ const deleteGoogleLinkingFromDB = async (res, username) => {
                 }
             }
         })
-    } catch {
-
+    } catch (err) {
+        console.error("["+new Date().toLocaleString()+"]: ", err);
+        res.sendStatus(500);
+    } finally {
+        await session.endSession();
     }
 }
 
