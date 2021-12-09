@@ -234,5 +234,5 @@ module.exports = (app) => {
     app.use(isLoggedIn);
     app.put("/api/logout", putLogout);
     app.put("/api/password", putPassword);
-    app.delete("api/unlink_google_account", deleteGoogleLinking);
+    app.delete("/api/unlink_google_account", deleteGoogleLinking);
 }
