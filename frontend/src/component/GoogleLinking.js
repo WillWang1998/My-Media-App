@@ -52,7 +52,7 @@ const GoogleLinking = () => {
 
 
     const onFinish = async () => {
-        window.location.href = "https://comp531-rw48-mymedia.herokuapp.com/api/auth/google";
+        window.location.href = "http://comp531-rw48-mymedia.herokuapp.com/auth/google";
     }
 
     return (

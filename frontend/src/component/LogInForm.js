@@ -40,7 +40,7 @@ const LogInForm = () => {
     };
 
     const googleLogin =  () => {
-        window.location.href = "https://comp531-rw48-mymedia.herokuapp.com/api/auth/google";
+        window.location.href = "https://comp531-rw48-mymedia.herokuapp.com/auth/google";
     }
 
     return (

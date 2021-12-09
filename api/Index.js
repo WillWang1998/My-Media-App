@@ -32,5 +32,5 @@ upCloud.setup(app);
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
     const add = server.address();
-    console.log(`Server listening at https://${add.address}:${add.port}`)
+    console.log(`Server listening at http://${add.address}:${add.port}`)
 });

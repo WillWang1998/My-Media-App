@@ -179,13 +179,13 @@ module.exports = (app) => {
     app.use(passport.initialize(undefined));
     app.use(passport.session(undefined));
     passport.use(googleStrategy);
-    app.get("/api/auth/google", //  TODO: Frontend link to here
+    app.get("/auth/google", //  TODO: Frontend link to here
         passport.authenticate("google",{
             scope: ["profile", "email"],
         })
     );
 
-    app.get("/api/auth/google/callback", (req, res) => {
+    app.get("/auth/google/callback", (req, res) => {
         passport.authenticate("google", async (err, user, info) => {
             if (!req.cookies || !req.cookies.sid) { // login
                 if (err) {
