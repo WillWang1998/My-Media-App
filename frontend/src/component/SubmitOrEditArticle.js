@@ -80,6 +80,14 @@ const SubmitOrEditArticle = (props) => {
         }
     }
 
+    const onReset = () => {
+        form.setFieldsValue({
+            "title": "",
+            "text": "",
+        });
+        setImageUrlsList(imageUrlsList => []);
+    }
+
     return (
         <Card bordered={true}>
             <Divider orientation="left">{
@@ -101,7 +109,7 @@ const SubmitOrEditArticle = (props) => {
                     <Button style={{width: "50%"}} htmlType="submit" type="primary">
                         Submit
                     </Button>
-                    <Button style={{width: "50%"}} htmlType="reset" type="default">
+                    <Button style={{width: "50%"}} htmlType="button" onClick={onReset} type="default">
                         Clear
                     </Button>
                 </Form.Item>
