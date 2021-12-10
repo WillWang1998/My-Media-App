@@ -30,6 +30,7 @@ const isLoggedIn = async (req, res, next) => {
                 res.sendStatus(500);
             } else if (username) {
                 req.username = username;
+                console.log("debug username", username);
                 res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000});
                 next();
             } else {
