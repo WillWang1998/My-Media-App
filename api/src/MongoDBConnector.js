@@ -331,7 +331,7 @@ const queryUserLoginInfoAndSaveSid = async (res, redisClient, userLoginInfo) => 
                 redisClient.hset("sessions", sid, userLoginInfo.username, (err) => {
                     if (err) {
                         console.error("["+new Date().toLocaleString()+"]: ", err);
-        res.sendStatus(500);
+                        res.sendStatus(500);
                     } else {
                         res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000});
                         res.cookie("sid", sid, { maxAge: 3600 * 1000, httpOnly: true});
@@ -721,7 +721,7 @@ const queryFollowingArticlesByUsernameFromDB = async (res, username) => {
     }, "followings", (err, doc) => {
         if (err) {
             console.error("["+new Date().toLocaleString()+"]: ", err);
-        res.sendStatus(500);
+            res.sendStatus(500);
         } else {
             Article.find({
                 username: {
@@ -730,7 +730,7 @@ const queryFollowingArticlesByUsernameFromDB = async (res, username) => {
             }, (err, doc) => {
                 if (err) {
                     console.error("["+new Date().toLocaleString()+"]: ", err);
-        res.sendStatus(500);
+                    res.sendStatus(500);
                 } else {
                     res.send(doc);
                 }
@@ -745,7 +745,7 @@ const queryArticlesByUsernameFromDB = (res, username) => {
     }, (err, doc) => {
         if (err) {
             console.error("["+new Date().toLocaleString()+"]: ", err);
-        res.sendStatus(500);
+            res.sendStatus(500);
         } else {
             res.send(doc);
         }
@@ -756,7 +756,7 @@ const queryArticleByIDFromDB = (res, username, id) => {
     Article.findById(id, (err, doc) => {
         if (err) {
             console.error("["+new Date().toLocaleString()+"]: ", err);
-        res.sendStatus(500);
+            res.sendStatus(500);
         } else if (!doc) {
             res.sendStatus(404);
         } else {
@@ -782,7 +782,7 @@ const queryFollowingArticleIdsByUsernameAndSearchKeyFromDB = async (res, searchP
     }, "followings", (err, doc) => {
         if (err) {
             console.error("["+new Date().toLocaleString()+"]: ", err);
-        res.sendStatus(500);
+            res.sendStatus(500);
         } else {
             let followings = doc.followings;
             let followingsWithSearchKeyInDisplayedName = [];
@@ -801,7 +801,7 @@ const queryFollowingArticleIdsByUsernameAndSearchKeyFromDB = async (res, searchP
             }, "username", (err, doc) => {
                 if (err) {
                     console.error("["+new Date().toLocaleString()+"]: ", err);
-        res.sendStatus(500);
+                    res.sendStatus(500);
                 } else {
                     followingsWithSearchKeyInDisplayedName = doc;
                     Article.find({
