@@ -330,7 +330,8 @@ const queryUserLoginInfoAndSaveSid = async (res, redisClient, userLoginInfo) => 
                 let sid = md5(new Date().getTime() + Math.random() * 1000000000000);
                 redisClient.hset("sessions", sid, userLoginInfo.username, (err) => {
                     if (err) {
-                        res.sendStatus(500);
+                        console.error("["+new Date().toLocaleString()+"]: ", err);
+        res.sendStatus(500);
                     } else {
                         res.cookie("isLoggedIn", true, {maxAge: 3600 * 1000});
                         res.cookie("sid", sid, { maxAge: 3600 * 1000, httpOnly: true});
@@ -678,6 +679,7 @@ const updateArticleToDB = async (res, articleId, username, article) => {
         returnDocument: "after",
     }, (err, doc) => {
         if (err) {
+            console.error("["+new Date().toLocaleString()+"]: ", err);
             res.sendStatus(500);
         } else if (!doc) {
             res.sendStatus(404);
@@ -702,6 +704,7 @@ const updateArticleTextToDB = (res, articleId, username, text) => {
         returnDocument: "after",
     }, (err, doc) => {
         if (err) {
+            console.error("["+new Date().toLocaleString()+"]: ", err);
             res.sendStatus(500);
         } else if (!doc) {
             res.sendStatus(404);
@@ -717,7 +720,8 @@ const queryFollowingArticlesByUsernameFromDB = async (res, username) => {
         username: username
     }, "followings", (err, doc) => {
         if (err) {
-            res.sendStatus(500);
+            console.error("["+new Date().toLocaleString()+"]: ", err);
+        res.sendStatus(500);
         } else {
             Article.find({
                 username: {
@@ -725,7 +729,8 @@ const queryFollowingArticlesByUsernameFromDB = async (res, username) => {
                 },
             }, (err, doc) => {
                 if (err) {
-                    res.sendStatus(500);
+                    console.error("["+new Date().toLocaleString()+"]: ", err);
+        res.sendStatus(500);
                 } else {
                     res.send(doc);
                 }
@@ -739,7 +744,8 @@ const queryArticlesByUsernameFromDB = (res, username) => {
         username: username
     }, (err, doc) => {
         if (err) {
-            res.sendStatus(500);
+            console.error("["+new Date().toLocaleString()+"]: ", err);
+        res.sendStatus(500);
         } else {
             res.send(doc);
         }
@@ -749,7 +755,8 @@ const queryArticlesByUsernameFromDB = (res, username) => {
 const queryArticleByIDFromDB = (res, username, id) => {
     Article.findById(id, (err, doc) => {
         if (err) {
-            res.sendStatus(500);
+            console.error("["+new Date().toLocaleString()+"]: ", err);
+        res.sendStatus(500);
         } else if (!doc) {
             res.sendStatus(404);
         } else {
@@ -774,7 +781,8 @@ const queryFollowingArticleIdsByUsernameAndSearchKeyFromDB = async (res, searchP
         username: username
     }, "followings", (err, doc) => {
         if (err) {
-            res.sendStatus(500);
+            console.error("["+new Date().toLocaleString()+"]: ", err);
+        res.sendStatus(500);
         } else {
             let followings = doc.followings;
             let followingsWithSearchKeyInDisplayedName = [];
@@ -792,7 +800,8 @@ const queryFollowingArticleIdsByUsernameAndSearchKeyFromDB = async (res, searchP
                 ]
             }, "username", (err, doc) => {
                 if (err) {
-                    res.sendStatus(500);
+                    console.error("["+new Date().toLocaleString()+"]: ", err);
+        res.sendStatus(500);
                 } else {
                     followingsWithSearchKeyInDisplayedName = doc;
                     Article.find({
@@ -817,6 +826,7 @@ const queryFollowingArticleIdsByUsernameAndSearchKeyFromDB = async (res, searchP
                         ]
                     }, "_id timestamp",(err, doc) => {
                         if (err) {
+                            console.error("["+new Date().toLocaleString()+"]: ", err);
                             res.sendStatus(500);
                         } else {
                             doc.sort((itemA, itemB) => {
@@ -841,6 +851,7 @@ const queryFollowingArticleIdsByUsernameFromDB = async (res, username) => {
         username: username
     }, "followings", (err, doc) => {
         if (err) {
+            console.error("["+new Date().toLocaleString()+"]: ", err);
             res.sendStatus(500);
         } else {
             let followings = doc.followings;
@@ -848,6 +859,7 @@ const queryFollowingArticleIdsByUsernameFromDB = async (res, username) => {
                 username: {$in: followings,},
             }, "_id timestamp",(err, doc) => {
                 if (err) {
+                    console.error("["+new Date().toLocaleString()+"]: ", err);
                     res.sendStatus(500);
                 } else {
                     doc.sort((itemA, itemB) => {
