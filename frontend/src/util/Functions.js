@@ -2,8 +2,6 @@ import {message} from "antd";
 import Cookies from 'js-cookie'
 
 export const isLoggedInAsCookie = () => {
-    console.log("document.cookie", document.cookie);
-    console.log("Cookies.get(\"isLoggedIn\")", Cookies.get("isLoggedIn"));
     return !!Cookies.get("isLoggedIn");
 }
 

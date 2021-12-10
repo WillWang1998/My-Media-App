@@ -4,7 +4,7 @@
   "description": "The final project of COMP531",
   "scripts": {
     "frontend": "cd frontend && npm start",
-    "api": "cd api && node index.js",
+    "api": "cd api && node Index.js",
     "dev": "concurrently --kill-others-on-fail \"npm run api\" \"npm run frontend\"",
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   },

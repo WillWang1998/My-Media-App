@@ -484,7 +484,7 @@ const deleteGoogleLinkingFromDB = async (res, username) => {
                     username: username
                 }, {
                     google_id: null,
-                    google_username: null,
+                    google_email: null,
                 },{
                     session: session
                 }).catch(err => {throw err;});
