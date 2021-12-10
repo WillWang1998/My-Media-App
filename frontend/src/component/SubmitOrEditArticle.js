@@ -46,6 +46,11 @@ const SubmitOrEditArticle = (props) => {
                     timestamp: res.timestamp,
                     images: res.images,
                 });
+                form.setFieldsValue({
+                    "title": res.title,
+                    "text": res.text,
+                });
+                setImageUrlsList(imageUrlsList => res.images);
             }).catch(err => message.error(err, 1));
         } else {
             await fetch("https://comp531-rw48-mymedia.herokuapp.com/api/article", {
@@ -65,6 +70,11 @@ const SubmitOrEditArticle = (props) => {
                 }
             }).then(res => {
                 message.success("Submit Successfully", 1);
+                form.setFieldsValue({
+                    "title": "",
+                    "text": "",
+                });
+                setImageUrlsList(imageUrlsList => []);
                 props.action(res._id);
             }).catch(err => message.error(err, 1));
         }
