@@ -12,7 +12,7 @@ const session = require("express-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
-const redisClient = redis.createClient("redis://:p6edd08766ce76cd4ca4dd50ba15c2598cce9b5bedfd5d7d47d6f05d459095ebf@ec2-3-216-109-138.compute-1.amazonaws.com:30519");
+const redisClient = redis.createClient("rediss://:p6edd08766ce76cd4ca4dd50ba15c2598cce9b5bedfd5d7d47d6f05d459095ebf@ec2-3-216-109-138.compute-1.amazonaws.com:30520");
 console.log("The connection with redis is established.");
 
 const isLoggedIn = async (req, res, next) => {
