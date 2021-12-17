@@ -47,6 +47,7 @@ const GoogleLinking = () => {
         }).then(() => {
             setGoogleEmail("");
             setDisableUnlink(true);
+            message.success("Unlink successfully!", 1);
         }).catch(err => message.error(err, 1));
     }
 

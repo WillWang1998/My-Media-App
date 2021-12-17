@@ -460,6 +460,9 @@ const addGoogleLinking = async (res, req) => {
                 google_id: googleLinkingInfo.googleId,
                 google_email: googleLinkingInfo.profile.email,
             }, {session: session}).catch(err => {throw err;});
+            res.cookie("backendMessage", "success#Linking successfully!", {
+                maxAge: 10000,
+            });
             res.redirect("https://comp531-rw48-mymedia.herokuapp.com/profile");
         });
     } catch (err) {

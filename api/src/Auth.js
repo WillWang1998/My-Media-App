@@ -202,16 +202,13 @@ module.exports = (app) => {
                     req.user = user;
                     await queryGoogleIdUsernameAndSaveSidOrRegister(res, redisClient, req);
                 }
-            } else { // binding
+            } else { // linking
                 let sid = req.cookies.sid;
                 redisClient.hget("sessions", sid, async (err, username) => {
                     if (err) {
                         console.error("["+new Date().toLocaleString()+"]: ", err);
                         res.cookie("backendMessage", "error#Internal Server Error", {
                             maxAge: 10000,
-                            sameSite: 'none',
-                            secure: true,
-                            
                         });
                         res.redirect("https://comp531-rw48-mymedia.herokuapp.com/profile");
                     } else if (username) {
@@ -219,12 +216,10 @@ module.exports = (app) => {
                         req.user = user;
                         await addGoogleLinking(res, req);
                     } else {
+                        res.clearCookie("sid");
                         res.cookie("backendMessage", "error#You need to login", {
                             maxAge: 10000,
-                            sameSite: 'none',
-                            secure: true,
                         });
-                        res.clearCookie("sid");
                         res.redirect("https://comp531-rw48-mymedia.herokuapp.com/landing");
                     }
                 });
